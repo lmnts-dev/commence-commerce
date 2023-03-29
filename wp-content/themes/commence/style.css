@@ -16,3 +16,7 @@
 .elementor-button{
   min-width: 199px;
 }
+
+.align-top{
+  align-self: baseline;
+}
