@@ -13,10 +13,17 @@
 
 /*THEME STYLES*/
 
+.align-top{
+  align-self: baseline;
+}
+
+/*Buttons*/
 .elementor-button-link.elementor-button{
   min-width: 199px;
 }
 
-.align-top{
-  align-self: baseline;
+.elementor-button-icon{
+  display: flex;
+  align-items: center;
 }
+
