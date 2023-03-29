@@ -11,3 +11,8 @@
  Text Domain:  commence
 */
 
+/*THEME STYLES*/
+
+.elementor-button{
+  min-width: 199px;
+}
