@@ -5,7 +5,7 @@ Tags: custom headers, http headers, headers, security, http header, header, cros
 Requires at least: 3.2
 Tested up to: 6.2
 Requires PHP: 5.3
-Stable tag: 1.18.8
+Stable tag: 1.18.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,11 @@ These HTTP headers are being used in production services by popular websites as 
 Updates are on they way, so stay tuned at [@DimitarIvanov](https://twitter.com/DimitarIvanov)
 
 == Changelog ==
+
+= 1.18.9 =
+*Release Date - 23rd April, 2023*
+
+* Fixed: Remote Code Execution by an Admin user
 
 = 1.18.8 =
 *Release Date - 17th April, 2023*

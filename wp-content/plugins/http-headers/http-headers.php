@@ -3,7 +3,7 @@
 Plugin Name: HTTP Headers
 Plugin URI: https://github.com/riverside/http-headers
 Description: A plugin for HTTP headers management including security, access-control (CORS), caching, compression, and authentication.
-Version: 1.18.8
+Version: 1.18.9
 Author: Dimitar Ivanov
 Author URI: https://github.com/riverside
 License: GPLv2 or later
@@ -784,6 +784,10 @@ function http_headers_option($option) {
     if (isset($_POST['hh_method']))
     {
         check_admin_referer('http-headers-mtd-options');
+        if (!is_super_admin()) {
+            wp_redirect(sprintf("%soptions-general.php?page=http-headers&tab=advanced&status=ERR&code=102", get_admin_url()));
+            exit;
+        }
 	# When method is changed
         http_headers_activate();
 	

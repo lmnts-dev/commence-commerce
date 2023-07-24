@@ -2,6 +2,7 @@
 if (!defined('ABSPATH')) {
     exit;
 } 
+$is_super_admin = is_super_admin();
 if (isset($_GET['status'], $_GET['code']) && $_GET['status'] == 'ERR') {
     switch ($_GET['code']) {
         case 100:
@@ -76,7 +77,7 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
 					<tr>
 						<td>Location of <code>.htaccess</code></td>
 						<td><?php
-                            if (is_super_admin()) {
+                            if ($is_super_admin) {
                                 ?><input type="text" name="hh_htaccess_path" placeholder="<?php echo get_home_path(); ?>.htaccess" style="width: 100%" value="<?php echo get_option('hh_htaccess_path'); ?>"><?php
                             } else {
                                 echo get_option('hh_htaccess_path');
@@ -86,7 +87,7 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
 					<tr>
 						<td>Location of <code>.user.ini</code></td>
                         <td><?php
-                            if (is_super_admin()) {
+                            if ($is_super_admin) {
                                 ?><input type="text" name="hh_user_ini_path" placeholder="<?php echo get_home_path(); ?>.user.ini" style="width: 100%" value="<?php echo get_option('hh_user_ini_path'); ?>"><?php
                             } else {
                                 echo get_option('hh_user_ini_path');
@@ -96,7 +97,7 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
 					<tr>
                         <td>Location of <code>.hh-htpasswd</code></td>
                         <td><?php
-                            if (is_super_admin()) {
+                            if ($is_super_admin) {
                                 ?><input type="text" name="hh_htpasswd_path" placeholder="<?php echo get_home_path(); ?>.hh-htpasswd" style="width: 100%" value="<?php echo get_option('hh_htpasswd_path'); ?>"><?php
                             } else {
                                 echo get_option('hh_htpasswd_path');
@@ -106,7 +107,7 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
                     <tr>
                         <td>Location of <code>.hh-htdigest</code></td>
                         <td><?php
-                            if (is_super_admin()) {
+                            if ($is_super_admin) {
                                 ?><input type="text" name="hh_htdigest_path" placeholder="<?php echo get_home_path(); ?>.hh-htdigest" style="width: 100%" value="<?php echo get_option('hh_htdigest_path'); ?>"><?php
                             } else {
                                 echo get_option('hh_htdigest_path');
@@ -114,7 +115,7 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
                             ?></td>
                     </tr>
                     <?php
-                    if (is_super_admin()) {
+                    if ($is_super_admin) {
                         ?>
 						<tr>
 							<td></td>
@@ -145,7 +146,11 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
 						);
 						$method = get_option('hh_method');
 						foreach ($items as $key => $val) {
-							?><p><label><input type="radio" name="hh_method" value="<?php echo $key; ?>"<?php checked($method, $key, true); ?>><?php echo $val; ?></label></p><?php
+						    if ($is_super_admin) {
+								?><p><label><input type="radio" name="hh_method" value="<?php echo $key; ?>"<?php checked($method, $key, true); ?>><?php echo $val; ?></label></p><?php
+                            } else {
+                                ?><p><label><input type="radio"<?php checked($method, $key, true); ?> disabled><?php echo $val; ?></label></p><?php
+                            }
 						}
 						?>
 						</fieldset>
@@ -153,12 +158,16 @@ include dirname(__FILE__) . '/includes/breadcrumbs.inc.php';
 		        </tr>
 			</tbody>
 		</table>
-		<?php submit_button(); ?>
+		<?php
+        if ($is_super_admin) {
+            submit_button();
+        }
+        ?>
 	</section>
 </form>
 
 <?php
-if (is_super_admin()) {
+if ($is_super_admin) {
     ?>
 	<section class="hh-panel">
 	    <table class="form-table hh-table">
